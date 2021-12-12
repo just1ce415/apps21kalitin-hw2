@@ -1,7 +1,5 @@
 package ua.edu.ucu.collections.immutable;
 
-import java.util.Arrays;
-import java.util.Objects;
 
 public final class ImmutableArrayList implements ImmutableList {
     private final Object[] array;
@@ -19,24 +17,26 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableList add(Object e) {
-        Object[] elements = new Object[size+1];
+        Object[] elements = new Object[size + 1];
 
-        if (size >= 0) System.arraycopy(array, 0, elements, 0, size);
+        if (size >= 0) {
+            System.arraycopy(array, 0, elements, 0, size);
+        }
         elements[size] = e;
         return new ImmutableArrayList(elements);
     }
 
     @Override
     public ImmutableList add(int index, Object e) {
-        Object[] elements = new Object[size+1];
+        Object[] elements = new Object[size + 1];
         int margin = 0;
 
-        for (int i = 0; i < size+1; i++){
+        for (int i = 0; i < size + 1; i++) {
             if (i == index) {
                 elements[i] = e;
                 margin = 1;
             } else {
-                elements[i] = array[i-margin];
+                elements[i] = array[i - margin];
             }
         }
         return new ImmutableArrayList(elements);
@@ -46,8 +46,12 @@ public final class ImmutableArrayList implements ImmutableList {
     public ImmutableList addAll(Object[] c) {
         int newArrLen = c.length;
         Object[] elements = new Object[size + newArrLen];
-        if (size >= 0) System.arraycopy(array, 0, elements, 0, size);
-        if (newArrLen > 0) System.arraycopy(c, 0, elements, size, newArrLen);
+        if (size >= 0) {
+            System.arraycopy(array, 0, elements, 0, size);
+        }
+        if (newArrLen > 0) {
+            System.arraycopy(c, 0, elements, size, newArrLen);
+        }
 
         return new ImmutableArrayList(elements);
     }
@@ -61,9 +65,14 @@ public final class ImmutableArrayList implements ImmutableList {
         int newArrLen = c.length;
         Object[] elements = new Object[size + newArrLen];
 
-        if (size >= 0) System.arraycopy(array, 0, elements, 0, index);
-        if (newArrLen > 0) System.arraycopy(c, 0, elements, index, newArrLen);
-        System.arraycopy(array, index, elements, index+newArrLen, size-index);
+        if (size >= 0) {
+            System.arraycopy(array, 0, elements, 0, index);
+        }
+        if (newArrLen > 0) {
+            System.arraycopy(c, 0, elements, index, newArrLen);
+        }
+        System.arraycopy(array, index, elements, index + newArrLen,
+                size - index);
 
         return new ImmutableArrayList(elements);
     }
@@ -75,14 +84,14 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableList remove(int index) {
-        Object[] elements = new Object[size-1];
+        Object[] elements = new Object[size - 1];
         int margin = 0;
 
-        for (int i = 0; i<size; i++) {
+        for (int i = 0; i < size; i++) {
             if (i == index) {
                 margin = 1;
             } else {
-                elements[i-margin] = array[i];
+                elements[i - margin] = array[i];
             }
         }
         return new ImmutableArrayList(elements);
@@ -99,8 +108,8 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public int indexOf(Object e) {
-        for (int i = 0; i < size; i++){
-            if (array[i].equals(e)){
+        for (int i = 0; i < size; i++) {
+            if (array[i].equals(e)) {
                 return i;
             }
         }

@@ -15,7 +15,7 @@ public final class ImmutableLinkedList implements ImmutableList {
         head = new Node(null, null, elements[0]);
         tail = head;
         Node pointer = head;
-        for (int i = 1; i < elements.length; i++){
+        for (int i = 1; i < elements.length; i++) {
             pointer.setNext(new Node(pointer, null, elements[i]));
             tail = pointer.getNext();
             pointer = pointer.getNext();
@@ -28,7 +28,7 @@ public final class ImmutableLinkedList implements ImmutableList {
         size = 0;
     }
 
-    public ImmutableLinkedList copy(){
+    public ImmutableLinkedList copy() {
         return new ImmutableLinkedList(this.toArray());
     }
 
@@ -66,7 +66,8 @@ public final class ImmutableLinkedList implements ImmutableList {
             pointer.setPrevious(new Node(null, pointer, e));
             copy.head = pointer.getPrevious();
         } else {
-            pointer.getPrevious().setNext(new Node(pointer.getPrevious(), pointer, e));
+            pointer.getPrevious().setNext(new Node(pointer.getPrevious(),
+                    pointer, e));
             pointer.setPrevious(pointer.getPrevious().getNext());
         }
         return copy;
@@ -98,7 +99,7 @@ public final class ImmutableLinkedList implements ImmutableList {
         }
 
         int counter = 0;
-        while(counter != index) {
+        while (counter != index) {
             pointer = pointer.getNext();
             counter++;
         }
@@ -119,7 +120,7 @@ public final class ImmutableLinkedList implements ImmutableList {
     @Override
     public Object get(int index) {
         Node pointer = head;
-        if (pointer == null){
+        if (pointer == null) {
             return null;
         }
 
@@ -259,6 +260,6 @@ public final class ImmutableLinkedList implements ImmutableList {
     }
 
     public ImmutableLinkedList removeLast() {
-        return (ImmutableLinkedList) remove(size-1);
+        return (ImmutableLinkedList) remove(size - 1);
     }
 }
